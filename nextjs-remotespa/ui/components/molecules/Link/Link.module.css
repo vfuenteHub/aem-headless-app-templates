@@ -1,0 +1,18 @@
+.root {
+}
+
+.always {
+  text-decoration: underline;
+}
+
+.hover {
+  text-decoration: none;
+}
+
+.hover:hover {
+  text-decoration: underline;
+}
+
+.none {
+  text-decoration: none;
+}
