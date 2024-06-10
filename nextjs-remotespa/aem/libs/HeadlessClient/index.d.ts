@@ -9,7 +9,7 @@ class HeadlessClient {
     options?: Partial<{
       [key: string]: unknown;
     }>;
-  }) {}
+  }): void;
 
   get host(): string;
   get client(): AEMHeadless;
