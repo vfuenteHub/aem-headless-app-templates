@@ -2,9 +2,9 @@ import * as React from 'react';
 
 type LoaderHTMLAttributes = React.AllHTMLAttributes<unknown>;
 
-export interface LoaderProps extends LoaderHTMLAttributes {
+export type LoaderProps = {
   component?: React.ElementType;
-}
+} & LoaderHTMLAttributes;
 
 export default function Loader(
   props: {

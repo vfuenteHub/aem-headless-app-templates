@@ -1,6 +1,6 @@
 import AEMHeadless from '@adobe/aem-headless-client-js';
 
-class HeadlessClient {
+export class HeadlessClient {
   #host;
   #client;
 
@@ -26,5 +26,3 @@ class HeadlessClient {
     return this.#client;
   }
 }
-
-export default HeadlessClient;

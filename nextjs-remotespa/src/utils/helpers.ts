@@ -1,4 +1,4 @@
-import modelClient from '@/controllers/model';
+import modelClient from '@/controllers/models';
 import { Constants } from '@adobe/aem-spa-page-model-manager';
 
 const AEM_HOST = process.env.NEXT_PUBLIC_AEM_HOST;
@@ -67,7 +67,7 @@ export const getPages = async (rootPath: string) => {
 
   try {
     const getRootPageModel = await modelClient.fetch(`${rootPath}.model.json`);
-    const pages = getRootPageModel[Constants.CHILDREN_PROP];
+    const pages: any = getRootPageModel[Constants.CHILDREN_PROP];
 
     for (const page in pages) {
       const match = page.match(pattern);

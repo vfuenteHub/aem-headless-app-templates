@@ -7,8 +7,8 @@ import { useCallback, useEffect } from 'react';
 
 import { ModelManager } from '@adobe/aem-spa-page-model-manager';
 
-import modelClient from '@/controllers/model';
-import '@/controllers/model/components';
+import '@/controllers/models/components';
+import modelClient from '@/controllers/models';
 
 import Loading from '@/components/molecules/Loading';
 import Loaders from '~/ui/plugins/Loaders';
@@ -24,7 +24,7 @@ const GTM_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID!;
 
 ModelManager.initializeAsync({ modelClient });
 
-const App = ({ Component, pageProps }: AppProps) => {
+export default function App({ Component, pageProps }: AppProps) {
   const { events } = useRouter();
 
   useReportWebVitals(metric => {
@@ -62,14 +62,12 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>{TITLE}</title>
-
         <meta name="description" content={DESCRIPTION} />
-
-        <link rel="icon" href="/favicon.ico" />
 
         <meta property="og:image" content={`${URL}/logo.svg`} />
         <meta name="og:title" content={TITLE} />
         <meta name="twitter:card" content="summary_large_image" />
+
         <meta property="cq:pagemodel_router" content="disabled" />
       </Head>
 
@@ -80,6 +78,4 @@ const App = ({ Component, pageProps }: AppProps) => {
       <GoogleTagManager gtmId={GTM_ID} />
     </>
   );
-};
-
-export default App;
+}

@@ -1,11 +1,11 @@
 // TODO
 type AEMHeadless = any;
 
-class HeadlessClient {
+export declare class HeadlessClient {
   constructor(args: {
     serviceURL?: string;
     endpoint?: string;
-    auth: string | string[];
+    auth?: string | string[];
     options?: Partial<{
       [key: string]: unknown;
     }>;

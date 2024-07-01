@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { type TransitionProps } from 'react-transition-group/Transition';
 
-export interface FadeProps extends TransitionProps {
+export type FadeProps = {
   in: boolean;
   timeout?: number;
-}
+} & TransitionProps;
 
 export default function Fade(
   props: {

@@ -2,9 +2,9 @@ import * as React from 'react';
 
 type TypographyHTMLAttributes = React.AllHTMLAttributes<unknown>;
 
-export interface TypographyProps extends TypographyHTMLAttributes {
+export type TypographyProps = {
   component?: React.ElementType;
-}
+} & TypographyHTMLAttributes;
 
 export default function Typography(
   props: {

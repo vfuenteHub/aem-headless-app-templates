@@ -10,9 +10,9 @@ type useLoadersReturns = {
 
 export function useLoaders(): useLoadersReturns;
 
-export interface LoadersProps {
+export type LoadersProps = {
   children: React.ReactNode;
   fallback?: React.ReactNode;
-}
+};
 
 export default function Loaders(props: LoadersProps): JSX.Element;

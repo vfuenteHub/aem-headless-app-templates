@@ -1,31 +1,21 @@
-import { getResponsivegridModel } from '@/api/model';
 import NotFound from '@/components/pages/NotFound';
 import Root from '@/components/pages/Root';
-import { _, getPages } from '@/utils/helpers';
 import {
-  type GetServerSidePropsContext,
-  type InferGetServerSidePropsType,
+  getResponsivegridModel,
+  type ResponsiveGridModelProps,
+} from '@/services/models';
+import { _, getPages } from '@/utils/helpers';
+import type {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
 } from 'next';
 
 const NOT_FOUND_HTTP_STATUS_CODE = 404;
 
 const AEM_ROOT = `/content/${process.env.NEXT_PUBLIC_AEM_SITE}/us/en`;
 
-const Page = ({
-  errorCode,
-  data,
-  pages,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  if (errorCode === NOT_FOUND_HTTP_STATUS_CODE) {
-    return <NotFound pages={pages} />;
-  }
-
-  return <Root data={data} pages={pages} />;
-};
-
-export default Page;
-
-export const getServerSideProps = async ({
+export const getServerSideProps = (async ({
   res,
   query,
 }: GetServerSidePropsContext) => {
@@ -34,9 +24,9 @@ export const getServerSideProps = async ({
 
   const { page = ['home'] } = query;
   const pagePath = `${AEM_ROOT}/${(page as string[])?.join('/')}`;
-  const model = await getResponsivegridModel(pagePath);
+  const modelProps = await getResponsivegridModel(pagePath);
 
-  const errorCode = _.isEmpty(model) ? NOT_FOUND_HTTP_STATUS_CODE : false;
+  const errorCode = _.isEmpty(modelProps) ? NOT_FOUND_HTTP_STATUS_CODE : false;
 
   res.setHeader(
     'Cache-Control',
@@ -48,9 +38,28 @@ export const getServerSideProps = async ({
       errorCode,
       pages,
       data: {
-        model,
+        modelProps,
         pagePath,
       },
     },
   };
-};
+}) satisfies GetServerSideProps<{
+  errorCode: boolean | number;
+  pages: any[];
+  data: {
+    modelProps: ResponsiveGridModelProps;
+    pagePath: string;
+  };
+}>;
+
+export default function Page({
+  errorCode,
+  data,
+  pages,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  if (errorCode === NOT_FOUND_HTTP_STATUS_CODE) {
+    return <NotFound pages={pages} />;
+  }
+
+  return <Root data={data} pages={pages} />;
+}

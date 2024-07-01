@@ -2,11 +2,11 @@ import * as React from 'react';
 
 type BackdropHTMLAttributes = React.AllHTMLAttributes<unknown>;
 
-export interface BackdropProps extends BackdropHTMLAttributes {
+export type BackdropProps = {
   component?: React.ElementType;
   open: boolean;
   zIndex?: number;
-}
+} & BackdropHTMLAttributes;
 
 export default function Backdrop(
   props: {

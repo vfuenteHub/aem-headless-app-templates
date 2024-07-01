@@ -1,12 +1,10 @@
 # build output
-dist
-build/
-out/
-.output/
-.next/
+/.next/
+/out/
+/build
 
 # dependencies
-node_modules/
+/node_modules
 package.json
 package-lock.json
 yarn.lock
@@ -17,8 +15,12 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# testing
+/coverage
+
 # environment variables
 .env*
 
-# others
+# custom
 /*.config.js
+/*.min.*

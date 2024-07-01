@@ -1,5 +1,4 @@
-import type { ModelClient } from '@adobe/aem-spa-page-model-manager';
-import CustomModelClient from '~/aem/libs/CustomModelClient';
+import { CustomModelClient } from '~/aem/libs/CustomModelClient';
 
 const modelClient = new CustomModelClient({
   host: process.env.NEXT_PUBLIC_AEM_HOST,
@@ -10,6 +9,6 @@ const modelClient = new CustomModelClient({
       )}`,
     },
   },
-}) as ModelClient & any;
+});
 
 export default modelClient;

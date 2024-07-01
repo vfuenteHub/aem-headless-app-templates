@@ -5,10 +5,10 @@ import type { UrlObject } from 'url';
 type LinkHTMLAttributes = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   TypographyProps;
 
-export interface LinkProps extends LinkHTMLAttributes {
+export type LinkProps = {
   href: string | UrlObject;
   underline?: 'always' | 'hover' | 'none';
-}
+} & LinkHTMLAttributes;
 
 export default function Link(
   props: {

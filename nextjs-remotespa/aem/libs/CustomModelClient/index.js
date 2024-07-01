@@ -1,6 +1,6 @@
 import { ModelClient } from '@adobe/aem-spa-page-model-manager';
 
-class CustomModelClient extends ModelClient {
+export class CustomModelClient extends ModelClient {
   #options;
 
   constructor({ host, options = {} }) {
@@ -33,5 +33,3 @@ class CustomModelClient extends ModelClient {
       .catch(Promise.reject);
   }
 }
-
-export default CustomModelClient;

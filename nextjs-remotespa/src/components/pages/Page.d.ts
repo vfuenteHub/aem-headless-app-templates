@@ -1,7 +1,7 @@
 declare namespace Page {
-  interface Props {
+  type Props = {
     pages: any[];
     data?: any;
     createUrl?: (value: string) => string;
-  }
+  };
 }

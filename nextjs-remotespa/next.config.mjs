@@ -1,19 +1,20 @@
 /** @type {import('next').NextConfig} */
-const path = require('path');
-const WebpackAssetsManifest = require('webpack-assets-manifest');
+import withBundleAnalyzer from '@next/bundle-analyzer';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import WebpackAssetsManifest from 'webpack-assets-manifest';
 
-const { protocol, hostname, port } = new URL(process.env.NEXT_PUBLIC_AEM_HOST);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const { protocol, hostname, port } = new URL(process.env.NEXT_PUBLIC_AEM_HOST);
+
 const nextConfig = {
-  experimental: {
-    webpackBuildWorker: true
-  },
   reactStrictMode: true,
-  swcMinify: true,
   productionBrowserSourceMaps: false,
   async headers() {
     return [
@@ -60,7 +61,7 @@ const nextConfig = {
   webpack(config) {
     config.plugins.push(
       new WebpackAssetsManifest({
-        output: '../public/asset-manifest.json',
+        output: path.join(__dirname, 'public', 'asset-manifest.json'),
         transform: assets => {
           const entrypoints = [];
 
@@ -91,12 +92,12 @@ const nextConfig = {
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/,
+        resourceQuery: /react/, // *.svg?react
       },
       {
         test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        resourceQuery: { not: /url/ },
+        issuer: fileLoaderRule.issuer,
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /react/] },
         use: ['@svgr/webpack'],
       }
     );
@@ -110,4 +111,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+export default bundleAnalyzer(nextConfig);

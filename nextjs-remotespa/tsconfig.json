@@ -30,7 +30,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["global.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "aem/aem.d.ts",
+    "svgr.d.ts",
+    "global.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

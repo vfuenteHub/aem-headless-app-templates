@@ -2,10 +2,10 @@ import * as React from 'react';
 
 export type Id = number;
 
-export interface Item {
+export type Item = {
   id: Id;
   [key: string]: unknown;
-}
+};
 
 export type Store = boolean;
 

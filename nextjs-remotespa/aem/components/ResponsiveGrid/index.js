@@ -2,6 +2,7 @@ import {
   EditableComponent,
   ResponsiveGrid,
 } from '@adobe/aem-react-editable-components';
+import * as React from 'react';
 
 const RESOURCE_TYPE = 'wcm/foundation/components/responsivegrid';
 
@@ -18,5 +19,4 @@ const AEMComponent = props => (
   </EditableComponent>
 );
 
-export { ResponsiveGrid };
 export default AEMComponent;

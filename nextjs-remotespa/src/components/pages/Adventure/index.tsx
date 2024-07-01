@@ -1,6 +1,6 @@
 import Image from '@/components/atoms/Image';
 import Layout from '@/components/templates/Layout';
-import { _, setTitle } from '@/utils/helpers';
+import { setTitle } from '@/utils/helpers';
 import Head from 'next/head';
 import { useMemo } from 'react';
 
